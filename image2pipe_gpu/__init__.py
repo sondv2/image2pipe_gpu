@@ -149,8 +149,7 @@ def images_from_url(q: Queue, video_url: str, ss: str = "00:00:00", fps: str = N
 
 
 def ffprobe(url):
-    p = subprocess.Popen(["ffprobe", "-v", "error", "-show_streams", "-print_format", "json", url],
-                         stdout=subprocess.PIPE)
+    p = subprocess.Popen(["ffprobe", "-v", "error", "-show_streams", "-print_format", "json", url], stdout=subprocess.PIPE)
     p.wait()
     if p.poll() != 0:
         raise RuntimeError("ffprobe exit code is %s" % p.poll())

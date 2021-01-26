@@ -1,0 +1,9 @@
+cams:
+  cam_54:
+    cam_url: 'data/1.mp4'
+    fps: 5
+    cuda_device: 0,
+  cam_64:
+    cam_url: 'data/2.mp4'
+    fps: 5
+    cuda_device: 0,

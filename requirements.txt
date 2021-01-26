@@ -1,5 +1,7 @@
 gevent
 greenlet
 opencv-python==4.1.0.25
-websocket
-numpy
+websocket~=0.2.1
+numpy~=1.19.5
+setuptools~=51.3.3
+redis~=3.0.1

@@ -24,7 +24,9 @@ def bgr24_from_stdin_subp(_fps, _scale):
     """
     vf_scale = "fps=%s,scale=%sx%s" % (_fps, _scale[0], _scale[1])
     cmd = [FFMPEG_BIN, "-v", "error",
+           "-hwaccel", "cuda",
            "-i", "pipe:0",
+           "-r", "5",
            "-an", "-sn", "-f", "image2pipe",
            "-vcodec", "rawvideo", "-pix_fmt", "bgr24", "-vf", vf_scale,
            "-y", "pipe:1"]
@@ -51,7 +53,7 @@ def images_from_url_subp(_fps, _scale, _url, ss=None, image_format='bgr24', vf: 
     if ss:
         cmd.append("-ss")
         cmd.append(ss)
-    cmd += ["-i", _url, '-an', '-sn', "-f", "image2pipe", "-vcodec", "rawvideo", "-pix_fmt", image_format]
+    cmd += ["-hwaccel", "cuda", "-i", _url, "-r", "5", '-an', '-sn', "-f", "image2pipe", "-vcodec", "rawvideo", "-pix_fmt", image_format]
 
     if vf:
         _vf = copy.copy(vf)
