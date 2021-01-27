@@ -4,7 +4,7 @@ from unittest import TestCase
 
 import cv2
 
-import image2pipe_gpu
+import image2pipe
 
 SCALE = scale = (320, 160)
 
@@ -16,7 +16,7 @@ logging.basicConfig()
 class Image2PipeTest(TestCase):
     def test_min_params(self):
         q = Queue()
-        decoder = image2pipe_gpu.images_from_url(q, VIDEO_URL)
+        decoder = image2pipe.images_from_url(q, VIDEO_URL)
         decoder.start()
 
         for i in range(30):
@@ -27,7 +27,7 @@ class Image2PipeTest(TestCase):
 
     def test_rgb24_from_url(self):
         q = Queue()
-        decoder = image2pipe_gpu.images_from_url(q, VIDEO_URL, fps="30", scale=SCALE)
+        decoder = image2pipe.images_from_url(q, VIDEO_URL, fps="30", scale=SCALE)
         decoder.start()
 
         for i in range(30):
@@ -39,7 +39,7 @@ class Image2PipeTest(TestCase):
     def test_vf(self):
         q = Queue()
         # decoder = image2pipe_gp.images_from_url(q, VIDEO_URL, fps="30", scale=SCALE, vf=["cropdetect=24:16:0"])
-        decoder = image2pipe_gpu.images_from_url(q, VIDEO_URL, fps="30", scale=SCALE, vf=["crop=224:224:0:36"])
+        decoder = image2pipe.images_from_url(q, VIDEO_URL, fps="30", scale=SCALE, vf=["crop=224:224:0:36"])
         decoder.start()
 
         fn, img = q.get()
@@ -55,12 +55,12 @@ class Image2PipeTest(TestCase):
 
         bgr_q = Queue()
 
-        decoder = image2pipe_gpu.images_from_url(bgr_q, VIDEO_URL, fps="30", scale=(1000, 552))
+        decoder = image2pipe.images_from_url(bgr_q, VIDEO_URL, fps="30", scale=(1000, 552))
         decoder.start()
 
         # rtmpt = image2pipe_gp.StitchVideoProcess(bgr_q, out_url, fps, scale, muxer="mov")
         FORMAT_MPEGTS = "mpegts"
-        rtmpt = image2pipe_gpu.StitchVideoProcess(bgr_q, out_url, fps, scale, FORMAT_MPEGTS)
+        rtmpt = image2pipe.StitchVideoProcess(bgr_q, out_url, fps, scale, FORMAT_MPEGTS)
         rtmpt.start()
 
         rtmpt.join()

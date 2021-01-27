@@ -4,19 +4,18 @@ from multiprocessing import Queue
 import redis
 import cv2
 import numpy as np
-import image2pipe_gpu
+import image2pipe
 from tqdm import tqdm
 import yaml
 import sys
 from config import Config
 import gevent
 import signal
-import traceback
+import os
+import json
+import base64
 
-cam_feeders = {}
-greenthreads = []
 logging.basicConfig()
-
 
 def signal_handler(signal, frame):
     print('Now exiting...')
@@ -34,24 +33,39 @@ def watchdog(rdb):
         gevent.sleep(5)
 
 
-def spawn(rdb, queue: Queue, cam_name: str, cam_url: str):
+def producer(rdb, queue: Queue, cam_name=None, cam_url=None, fps=None):
+
     # Redis channel
-    t = tqdm(None, desc='%s - %s' % (cam_name, 0), leave=True)
+    t = tqdm(None, desc='file= %s\tframe= %s\ttime=%s' % (None, 0, 0), leave=True)
     redis_channel = '{}/frame'.format(cam_name)
+
     while True:
         try:
             fn, img = queue.get()
+            if fn == -1:
+                file_name = img
+                continue
             ret, buf = cv2.imencode('.jpg', img)
             img_bytes = np.array(buf).tostring()
-            rdb.rpush(redis_channel, img_bytes)
-            t.set_description('%s - %s' % (cam_url, fn))
+
+            # rdb.rpush(redis_channel, img_bytes)
+            image = base64.b64encode(img_bytes)
+            mydict = {
+                'file': file_name,
+                'time': fn / fps,
+                'data': image.decode()
+            }
+            jdict = json.dumps(mydict)
+            rdb.rpush(redis_channel, jdict)
+
+            t.set_description('file= %s\tframe= %s\ttime=%s' % (file_name, fn, fn / fps))
             t.refresh()
         except Exception as ex:
-            print("End %s" % cam_url)
+            print("EOF %s" % file_name)
             # sys.exit()
 
-
 def main():
+
     # Register exit handler
     signal.signal(signal.SIGINT, signal_handler)
     # print('Press Ctrl+C to exit.')
@@ -69,8 +83,6 @@ def main():
         # print("Deleting: {}".format(key))
         rdb.delete(key)
 
-    global greenthreads
-
     # Create every cam feeder
     for cam_name, cam in cams.items():
         print('Adding cam {0} to the dict'.format(cam_name))
@@ -78,24 +90,28 @@ def main():
         fps = cam.get('fps')
 
         queue = Queue()
-        cf = image2pipe_gpu.images_from_url(q=queue, video_url=cam_url, fps=fps, scale=(1920, 1080))
-        cf.start()
-
-        p = multiprocessing.Process(target=spawn, args=(rdb, queue, cam_name, cam_url))
+        p = multiprocessing.Process(target=producer, args=(rdb, queue, cam_name, cam_url, fps))
         p.start()
 
-    watchdog(rdb)
-    # gevent.sleep(15)
-    # print(cf.is_alive())
-    # print(p.is_alive())
+        if os.path.isdir(cam_url):
+            while True:
+                lst_file = os.listdir(cam_url)
+                for file in lst_file:
+                    file_url = os.path.join(cam_url, file)
+                    queue.put((-1, file))
+                    cf = image2pipe.images_from_url(q=queue, video_url=file_url, fps=fps, scale=(1920, 1080))
+                    cf.start()
+                    while cf.is_alive() is True:
+                        gevent.sleep(1)
+                    os.remove(file_url)
+                print('Wait for new file')
+                gevent.sleep(5)
+        elif os.path.isfile(cam_url):
+            queue.put((-1, cam_url))
+            cf = image2pipe.images_from_url(q=queue, video_url=cam_url, fps=fps, scale=(1920, 1080))
+            cf.start()
 
-    # # Create the watchdog
-    # g = gevent.spawn(watchdog, rdb)
-    # greenthreads.append(g)
-    #
-    # # Wait for greenlets
-    # for g in greenthreads:
-    #     g.join()
+    watchdog(rdb)
 
 
 if __name__ == '__main__':

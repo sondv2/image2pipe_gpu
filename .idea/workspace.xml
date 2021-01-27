@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22b174d1-2eaf-42f0-ad74-ce74eab6391e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cams.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redis_to_images.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/video_to_redis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/image2pipe_gpu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/image2pipe_gpu.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe_gpu/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe/ffmpeg.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe_gpu/ffmpeg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe_gpu/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/ffmpeg.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/ffmpeg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redis_to_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/redis_to_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_imagepipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_imagepipe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video_to_redis.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_to_redis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,10 +38,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -108,21 +110,5 @@
       <updated>1611547828254</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/redis_to_images.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/video_to_redis.py</url>
-          <line>86</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
