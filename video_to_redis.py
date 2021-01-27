@@ -14,6 +14,8 @@ import signal
 import os
 import json
 import base64
+from psutil import virtual_memory
+
 
 logging.basicConfig()
 
@@ -63,6 +65,12 @@ def producer(rdb, queue: Queue, cam_name=None, cam_url=None, fps=None):
         except Exception as ex:
             print("EOF %s" % file_name)
             # sys.exit()
+def out_of_memory():
+    mem = virtual_memory()
+    while mem.free <= 2048 * 10 ** 6:
+        print('Out of memory')
+        gevent.sleep(5)
+
 
 def main():
 
@@ -97,6 +105,7 @@ def main():
             while True:
                 lst_file = os.listdir(cam_url)
                 for file in lst_file:
+                    out_of_memory()
                     file_url = os.path.join(cam_url, file)
                     queue.put((-1, file))
                     cf = image2pipe.images_from_url(q=queue, video_url=file_url, fps=fps, scale=(1920, 1080))

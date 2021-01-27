@@ -5,3 +5,4 @@ websocket~=0.2.1
 numpy~=1.19.5
 setuptools~=51.3.3
 redis~=3.0.1
+psutil

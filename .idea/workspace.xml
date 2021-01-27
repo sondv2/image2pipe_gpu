@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22b174d1-2eaf-42f0-ad74-ce74eab6391e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/ffmpeg.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/ffmpeg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image2pipe_gpu/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/image2pipe/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redis_to_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/redis_to_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_imagepipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_imagepipe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/video_to_redis.py" beforeDir="false" afterPath="$PROJECT_DIR$/video_to_redis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
